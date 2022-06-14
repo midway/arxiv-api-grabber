@@ -39,14 +39,18 @@ const getFeedData = async (url) => {
 const stringifier = stringify({header: true, columns });
   
 let morePages = true;
+let totalResultsDisplayed = false;
 let start = argv.start;
 let consecutiveFailures = 0;
 
 do {
   const url = `http://export.arxiv.org/api/query?search_query=${argv.query}&start=${start}&max_results=50`
   const feedData = await getFeedData(url);
-  console.log(`Total Results: ${feedData.totalResults}`);
   if( feedData ) {
+    if(!totalResultsDisplayed) {
+      console.log(`Total Results: ${feedData.totalResults}`);
+      totalResultsDisplayed = true;
+    }
     feedData.entries.map(e => {
         stringifier.write(e);
     })
@@ -57,12 +61,12 @@ do {
     sleep(5000);
   } else {
     consecutiveFailures = consecutiveFailures + 1
-    morePages = false
     console.log(`feedData is empty.`);
     if( consecutiveFailures === 1) {
       console.log(`Pausing 30 seconds before continuing`);
       sleep(30000);
     } else {
+      morePages = false;
       console.log(`To resume, execute node index.js --start ${start} --query "${argv.query}"`);
     }
   }
