@@ -53,6 +53,7 @@ do {
 
     morePages = feedData.itemsPerPage === feedData.entries.length;
     start = start + 50;
+    consecutiveFailures = 0;
     sleep(5000);
   } else {
     consecutiveFailures = consecutiveFailures + 1
