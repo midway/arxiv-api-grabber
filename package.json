@@ -1,0 +1,17 @@
+{
+  "name": "arxiv-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "csv-stringify": "^6.1.0",
+    "feed-reader": "github:midway/feed-reader",
+    "yargs": "^17.5.1"
+  },
+  "type": "module"
+}
